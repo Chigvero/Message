@@ -23,11 +23,11 @@ func main() {
 		viper.GetString("db.dbname"),
 		viper.GetString("db.ssl_mode"),
 	}
-	DB, err := repository.NewPostgresDB(config)
+	conn, err := repository.NewPostgresConnection(config)
 	if err != nil {
 		log.Fatal(err)
 	}
-	repos := repository.NewRepository(DB)
+	repos := repository.NewRepository(conn)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 	router := handlers.InitRoutes()

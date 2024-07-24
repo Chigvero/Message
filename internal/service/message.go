@@ -5,24 +5,24 @@ import (
 	"github.com/Chigvero/Messageio/internal/repository"
 )
 
-type Message struct {
-	repos *repository.Repository
+type MessageService struct {
+	repos repository.MessageRepository
 }
 
-func NewMessage(repos *repository.Repository) *Message {
-	return &Message{
-		repos: repos,
+func NewMessageService(repos *repository.Repository) *MessageService {
+	return &MessageService{
+		repos: repos.MessageRepository,
 	}
 }
 
-func (s *Message) CreateMessage(message Intern.Message) (int, error) {
+func (s *MessageService) CreateMessage(message Intern.Message) (int, error) {
 	return s.repos.CreateMessage(message)
 }
 
-func (s *Message) ProcessMessage() {
+func (s *MessageService) ProcessMessage() {
 	//return s.repos.ProcessMessage()
 }
 
-func (s *Message) GetMessageById(id int) (Intern.Message, error) {
+func (s *MessageService) GetMessageById(id int) (Intern.Message, error) {
 	return s.repos.GetMessageById(id)
 }

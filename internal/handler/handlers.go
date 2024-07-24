@@ -18,7 +18,7 @@ func (h *Handler) CreateMessage(c *gin.Context) {
 		c.AbortWithStatusJSON(400, res)
 		return
 	}
-	id, err := h.service.CreateMessage(msg)
+	id, err := h.service.Message.CreateMessage(msg)
 	if err != nil {
 		log.Println(err)
 		res := Error{

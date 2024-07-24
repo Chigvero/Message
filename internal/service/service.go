@@ -2,23 +2,21 @@ package service
 
 import (
 	Intern "github.com/Chigvero/Messageio"
-	repository "github.com/Chigvero/Messageio/internal/repository"
+	"github.com/Chigvero/Messageio/internal/repository"
 )
 
-type Business interface {
+type Message interface {
 	CreateMessage(message Intern.Message) (int, error)
 	ProcessMessage()
 	GetMessageById(id int) (Intern.Message, error)
 }
 
 type Service struct {
-	Business
-	repos *repository.Repository
+	Message
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
-		repos:    repos,
-		Business: NewMessage(repos),
+		Message: NewMessageService(repos),
 	}
 }

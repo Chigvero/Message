@@ -20,7 +20,7 @@ type Config struct {
 	SSLMode  string `yaml:"ssl_mode"`
 }
 
-func NewPostgresDB(cfg *Config) (*sqlx.DB, error) {
+func NewPostgresConnection(cfg *Config) (*sqlx.DB, error) {
 	db, err := sqlx.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
 		cfg.Host, cfg.Port, cfg.User, cfg.DBName, cfg.Password, cfg.SSLMode))
 	if err != nil {

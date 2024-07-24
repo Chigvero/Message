@@ -5,18 +5,18 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-type DataBase interface {
+type MessageRepository interface {
 	CreateMessage(message Intern.Message) (int, error)
 	ProcessMessage()
 	GetMessageById(id int) (Intern.Message, error)
 }
 
 type Repository struct {
-	DataBase
+	MessageRepository
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		DataBase: NewMessagePostgresDB(db),
+		MessageRepository: NewMessagePostgresDB(db),
 	}
 }
