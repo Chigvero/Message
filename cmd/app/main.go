@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/Chigvero/Messageio/internal/handler"
+	"github.com/Chigvero/Messageio/internal/kafka"
 	"github.com/Chigvero/Messageio/internal/repository"
 	"github.com/Chigvero/Messageio/internal/service"
 	_ "github.com/lib/pq"
@@ -28,10 +29,27 @@ func main() {
 		log.Fatal(err)
 	}
 	repos := repository.NewRepository(conn)
-	services := service.NewService(repos)
+	producer, err := kafka.NewProducer()
+	if err != nil {
+		log.Fatal(err)
+	}
+	consumer, err := kafka.NewConsumerGroup(repos)
+	if err != nil {
+		log.Fatal(err)
+	}
+	go consumer.Start()
+	services := service.NewService(repos, producer)
 	handlers := handler.NewHandler(services)
 	router := handlers.InitRoutes()
-	http.ListenAndServe("localhost:8080", router)
+	go func() {
+		if err := http.ListenAndServe("localhost:8080", router); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("server failed: %v", err)
+		}
+	}()
+	consumer.Close()
+	for {
+
+	}
 }
 
 func InitConfig() error {

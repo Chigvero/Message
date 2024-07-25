@@ -1,18 +1,47 @@
 package kafka
 
 import (
-	"context"
-	"github.com/segmentio/kafka-go"
+	"encoding/json"
+	Message "github.com/Chigvero/Messageio"
+	"github.com/Chigvero/Messageio/internal/repository"
+	"github.com/IBM/sarama"
 )
 
-func NewConsumer() (*kafka.ConsumerGroup, error) {
-	topic := "message"
-	partition := 0
-	conn, err := kafka.DialLeader(context.Background(), "tcp",
-		"localhost:9092", topic, partition)
+type Consumer struct {
+	consumerGroup sarama.Consumer
+	repos         repository.MessageRepository
+}
+
+func NewConsumerGroup(repos *repository.Repository) (*Consumer, error) {
+	consumer, err := sarama.NewConsumer([]string{"localhost:9092"}, nil)
 	if err != nil {
 		return nil, err
 	}
-	defer conn.Close()
-	return nil, err
+	return &Consumer{
+		consumer,
+		repos.MessageRepository,
+	}, nil
+}
+
+func (c *Consumer) Start() error {
+	message := Message.Message{}
+	partConsumer, err := c.consumerGroup.ConsumePartition("my-topic", 0, sarama.OffsetNewest)
+	if err != nil {
+		return err
+	}
+	defer partConsumer.Close()
+	for {
+		select {
+		case msg, ok := <-partConsumer.Messages():
+			if !ok {
+				return err
+			}
+			json.Unmarshal(msg.Value, &message)
+			c.repos.ProcessMessage(message.Id)
+		}
+	}
+}
+
+func (c *Consumer) Close() {
+	c.consumerGroup.Close()
 }

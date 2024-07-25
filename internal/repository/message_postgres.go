@@ -25,8 +25,9 @@ func (r *MessagePostgresDB) CreateMessage(message Intern.Message) (int, error) {
 	return message.Id, nil
 }
 
-func (r *MessagePostgresDB) ProcessMessage() {
-
+func (r *MessagePostgresDB) ProcessMessage(id int) {
+	query := fmt.Sprintf("UPDATE %x SET processed=true where id=$1", messagesTable)
+	r.db.Exec(query, id)
 }
 
 func (r *MessagePostgresDB) GetMessageById(id int) (Intern.Message, error) {

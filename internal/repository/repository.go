@@ -7,7 +7,7 @@ import (
 
 type MessageRepository interface {
 	CreateMessage(message Intern.Message) (int, error)
-	ProcessMessage()
+	ProcessMessage(id int)
 	GetMessageById(id int) (Intern.Message, error)
 }
 
