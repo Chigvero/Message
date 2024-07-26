@@ -9,7 +9,8 @@ import (
 
 func (h *Handler) CreateMessage(c *gin.Context) {
 	var msg Intern.Message
-	err := c.BindJSON(&msg)
+	err := c.ShouldBindBodyWithJSON(&msg)
+	
 	if err != nil {
 		log.Println(err)
 		res := Error{

@@ -37,7 +37,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	go consumer.Start()
+	go func() {
+		if err := consumer.Start(); err != nil {
+			log.Fatalf("Failed to start consumer: %v", err)
+		}
+	}()
 	services := service.NewService(repos, producer)
 	handlers := handler.NewHandler(services)
 	router := handlers.InitRoutes()
@@ -46,7 +50,8 @@ func main() {
 			log.Fatalf("server failed: %v", err)
 		}
 	}()
-	consumer.Close()
+
+	// Ожидание сигнала завершения работы
 	for {
 
 	}
