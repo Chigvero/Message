@@ -2,9 +2,10 @@ package repository
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
-	"log"
 )
 
 const (
@@ -21,8 +22,10 @@ type Config struct {
 }
 
 func NewPostgresConnection(cfg *Config) (*sqlx.DB, error) {
-	db, err := sqlx.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
-		cfg.Host, cfg.Port, cfg.User, cfg.DBName, cfg.Password, cfg.SSLMode))
+	query := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
+		cfg.Host, cfg.Port, cfg.User, cfg.DBName, cfg.Password, cfg.SSLMode)
+	fmt.Println(query)
+	db, err := sqlx.Open("postgres", query)
 	if err != nil {
 		return nil, err
 	}

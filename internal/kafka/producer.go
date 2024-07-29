@@ -2,6 +2,8 @@ package kafka
 
 import (
 	"encoding/json"
+	"fmt"
+
 	Message "github.com/Chigvero/Messageio/modelMessage"
 	"github.com/IBM/sarama"
 )
@@ -11,7 +13,8 @@ type Producer struct {
 }
 
 func NewProducer() (*Producer, error) {
-	producer, err := sarama.NewSyncProducer([]string{"localhost:9092"}, nil)
+	fmt.Println("kafka:9092-producer")
+	producer, err := sarama.NewSyncProducer([]string{"kafka:9092"}, nil)
 	if err != nil {
 		return nil, err
 	}

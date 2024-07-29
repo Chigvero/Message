@@ -37,16 +37,17 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	go func() {
-		if err := consumer.Start(); err != nil {
-			log.Fatalf("Failed to start consumer: %v", err)
-		}
-	}()
+	_ = consumer
+	// go func() {
+	// 	if err := consumer.Start(); err != nil {
+	// 		log.Fatalf("Failed to start consumer: %v", err)
+	// 	}
+	// }()
 	services := service.NewService(repos, producer)
 	handlers := handler.NewHandler(services)
 	router := handlers.InitRoutes()
 	go func() {
-		if err := http.ListenAndServe("localhost:8081", router); err != nil && err != http.ErrServerClosed {
+		if err := http.ListenAndServe(":8081", router); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("server failed: %v", err)
 		}
 	}()

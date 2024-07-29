@@ -3,10 +3,11 @@ package kafka
 import (
 	"encoding/json"
 	"fmt"
+	"log"
+
 	"github.com/Chigvero/Messageio/internal/repository"
 	Message "github.com/Chigvero/Messageio/modelMessage"
 	"github.com/IBM/sarama"
-	"log"
 )
 
 type Consumer struct {
@@ -15,7 +16,8 @@ type Consumer struct {
 }
 
 func NewConsumerGroup(repos *repository.Repository) (*Consumer, error) {
-	consumer, err := sarama.NewConsumer([]string{"localhost:9092"}, nil)
+	fmt.Println("kafka:9092-consumer")
+	consumer, err := sarama.NewConsumer([]string{"kafka:9092"}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -28,6 +30,7 @@ func NewConsumerGroup(repos *repository.Repository) (*Consumer, error) {
 func (c *Consumer) Start() error {
 	partConsumer, err := c.consumerGroup.ConsumePartition("my-topic", 0, sarama.OffsetNewest)
 	if err != nil {
+		fmt.Println("err: %s", err.Error())
 		return err
 	}
 	log.Println("Consumer STARTED")
