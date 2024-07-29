@@ -2,7 +2,7 @@ package repository
 
 import (
 	"fmt"
-	Intern "github.com/Chigvero/Messageio"
+	Intern "github.com/Chigvero/Messageio/modelMessage"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -38,4 +38,13 @@ func (r *MessagePostgresDB) GetMessageById(id int) (Intern.Message, error) {
 		return Intern.Message{}, err
 	}
 	return msg, nil
+}
+func (r *MessagePostgresDB) GetStats() (int, error) {
+	var result int
+	query := fmt.Sprintf("SELECT (COUNT(*) FILTER (WHERE processed = true)*100/ COUNT(*)) AS true_percentage FROM %s;", messagesTable)
+	err := r.db.QueryRow(query).Scan(&result)
+	if err != nil {
+		return 0, err
+	}
+	return result, nil
 }

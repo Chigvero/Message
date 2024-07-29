@@ -1,7 +1,7 @@
 package handler
 
 import (
-	Intern "github.com/Chigvero/Messageio"
+	Intern "github.com/Chigvero/Messageio/modelMessage"
 	"github.com/gin-gonic/gin"
 	"log"
 	"strconv"
@@ -10,7 +10,7 @@ import (
 func (h *Handler) CreateMessage(c *gin.Context) {
 	var msg Intern.Message
 	err := c.ShouldBindBodyWithJSON(&msg)
-	
+
 	if err != nil {
 		log.Println(err)
 		res := Error{
@@ -34,8 +34,15 @@ func (h *Handler) CreateMessage(c *gin.Context) {
 	})
 }
 
-func (h *Handler) ProcessMessage(c *gin.Context) {
-	//return s.repos.ProcessMessage()
+func (h *Handler) GetStats(c *gin.Context) {
+	stats, err := h.service.GetStats()
+	if err != nil {
+		log.Println(err)
+		res := Error{"Please try again later"}
+		c.AbortWithStatusJSON(500, res)
+		return
+	}
+	c.JSON(200, stats)
 }
 
 func (h *Handler) GetMessageById(c *gin.Context) {

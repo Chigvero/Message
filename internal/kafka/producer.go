@@ -2,7 +2,7 @@ package kafka
 
 import (
 	"encoding/json"
-	Message "github.com/Chigvero/Messageio"
+	Message "github.com/Chigvero/Messageio/modelMessage"
 	"github.com/IBM/sarama"
 )
 

@@ -1,9 +1,9 @@
 package service
 
 import (
-	Intern "github.com/Chigvero/Messageio"
 	"github.com/Chigvero/Messageio/internal/kafka"
 	"github.com/Chigvero/Messageio/internal/repository"
+	Intern "github.com/Chigvero/Messageio/modelMessage"
 )
 
 type MessageService struct {
@@ -32,4 +32,8 @@ func (s *MessageService) ProcessMessage(id int) {
 
 func (s *MessageService) GetMessageById(id int) (Intern.Message, error) {
 	return s.repos.GetMessageById(id)
+}
+
+func (s *MessageService) GetStats() (int, error) {
+	return s.repos.GetStats()
 }

@@ -46,7 +46,7 @@ func main() {
 	handlers := handler.NewHandler(services)
 	router := handlers.InitRoutes()
 	go func() {
-		if err := http.ListenAndServe("localhost:8080", router); err != nil && err != http.ErrServerClosed {
+		if err := http.ListenAndServe("localhost:8081", router); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("server failed: %v", err)
 		}
 	}()

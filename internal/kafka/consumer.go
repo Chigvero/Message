@@ -3,8 +3,8 @@ package kafka
 import (
 	"encoding/json"
 	"fmt"
-	Message "github.com/Chigvero/Messageio"
 	"github.com/Chigvero/Messageio/internal/repository"
+	Message "github.com/Chigvero/Messageio/modelMessage"
 	"github.com/IBM/sarama"
 	"log"
 )
