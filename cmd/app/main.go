@@ -3,6 +3,9 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/Chigvero/Messageio/internal/handler"
 	"github.com/Chigvero/Messageio/internal/kafka"
@@ -46,16 +49,33 @@ func main() {
 	services := service.NewService(repos, producer)
 	handlers := handler.NewHandler(services)
 	router := handlers.InitRoutes()
+
+	server := &http.Server{
+		Addr:    ":8081",
+		Handler: router,
+	}
+
 	go func() {
-		if err := http.ListenAndServe(":8081", router); err != nil && err != http.ErrServerClosed {
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("server failed: %v", err)
 		}
 	}()
 
 	// Ожидание сигнала завершения работы
-	for {
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
+	<-sigChan
+	log.Println("Shutting down...")
 
+	// Закрытие консьюмера Kafka
+	consumer.Close()
+	log.Println("Consumer closed")
+
+	// Закрытие HTTP сервера
+	if err := server.Shutdown(nil); err != nil {
+		log.Fatalf("server shutdown failed: %v", err)
 	}
+	log.Println("Server stopped")
 }
 
 func InitConfig() error {
