@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	Message "github.com/Chigvero/Messageio/modelMessage"
+	Message "github.com/Chigvero/Messageio/model/message"
 	"github.com/IBM/sarama"
 )
 

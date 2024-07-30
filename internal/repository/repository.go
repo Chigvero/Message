@@ -1,7 +1,7 @@
 package repository
 
 import (
-	Intern "github.com/Chigvero/Messageio/modelMessage"
+	Intern "github.com/Chigvero/Messageio/model/message"
 	"github.com/jmoiron/sqlx"
 )
 

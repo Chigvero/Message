@@ -2,7 +2,7 @@ package service
 
 import (
 	"github.com/Chigvero/Messageio/internal/repository"
-	"github.com/Chigvero/Messageio/modelMessage"
+	message "github.com/Chigvero/Messageio/model/message"
 )
 
 type MessageService struct {
@@ -15,7 +15,7 @@ func NewMessageService(repos *repository.Repository) *MessageService {
 	}
 }
 
-func (s *MessageService) CreateMessage(message modelMessage.Message) (int, error) {
+func (s *MessageService) CreateMessage(message message.Message) (int, error) {
 	return s.repos.CreateMessage(message)
 }
 
@@ -23,6 +23,6 @@ func (s *MessageService) ProcessMessage() {
 	//return s.repos.ProcessMessage()
 }
 
-func (s *MessageService) GetMessageById(id int) (modelMessage.Message, error) {
+func (s *MessageService) GetMessageById(id int) (message.Message, error) {
 	return s.repos.GetMessageById(id)
 }

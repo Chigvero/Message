@@ -4,7 +4,7 @@ import (
 	"log"
 	"strconv"
 
-	Intern "github.com/Chigvero/Messageio/modelMessage"
+	Intern "github.com/Chigvero/Messageio/model/message"
 	"github.com/gin-gonic/gin"
 )
 

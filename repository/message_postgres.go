@@ -3,7 +3,7 @@ package repository
 import (
 	"fmt"
 
-	"github.com/Chigvero/Messageio/modelMessage"
+	"github.com/Chigvero/Messageio/model/message"
 	"github.com/jmoiron/sqlx"
 )
 

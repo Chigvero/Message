@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/Chigvero/Messageio/internal/repository"
-	Message "github.com/Chigvero/Messageio/modelMessage"
+	Message "github.com/Chigvero/Messageio/model/message"
 	"github.com/IBM/sarama"
 )
 

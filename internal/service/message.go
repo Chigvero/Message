@@ -3,7 +3,7 @@ package service
 import (
 	"github.com/Chigvero/Messageio/internal/kafka"
 	"github.com/Chigvero/Messageio/internal/repository"
-	Intern "github.com/Chigvero/Messageio/modelMessage"
+	Intern "github.com/Chigvero/Messageio/model/message"
 )
 
 type MessageService struct {
