@@ -1,10 +1,11 @@
 package handler
 
 import (
-	Intern "github.com/Chigvero/Messageio/modelMessage"
-	"github.com/gin-gonic/gin"
 	"log"
 	"strconv"
+
+	Intern "github.com/Chigvero/Messageio/modelMessage"
+	"github.com/gin-gonic/gin"
 )
 
 func (h *Handler) CreateMessage(c *gin.Context) {

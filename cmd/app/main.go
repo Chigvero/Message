@@ -1,14 +1,15 @@
 package main
 
 import (
+	"log"
+	"net/http"
+
 	"github.com/Chigvero/Messageio/internal/handler"
 	"github.com/Chigvero/Messageio/internal/kafka"
 	"github.com/Chigvero/Messageio/internal/repository"
 	"github.com/Chigvero/Messageio/internal/service"
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
-	"log"
-	"net/http"
 )
 
 func main() {

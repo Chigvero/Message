@@ -1,14 +1,14 @@
 package service
 
 import (
-	Intern "github.com/Chigvero/Messageio"
 	"github.com/Chigvero/Messageio/internal/repository"
+	"github.com/Chigvero/Messageio/modelMessage"
 )
 
 type Message interface {
-	CreateMessage(message Intern.Message) (int, error)
+	CreateMessage(message modelMessage.Message) (int, error)
 	ProcessMessage()
-	GetMessageById(id int) (Intern.Message, error)
+	GetMessageById(id int) (modelMessage.Message, error)
 }
 
 type Service struct {

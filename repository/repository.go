@@ -1,14 +1,14 @@
 package repository
 
 import (
-	Intern "github.com/Chigvero/Messageio"
+	"github.com/Chigvero/Messageio/modelMessage"
 	"github.com/jmoiron/sqlx"
 )
 
 type MessageRepository interface {
-	CreateMessage(message Intern.Message) (int, error)
+	CreateMessage(message modelMessage.Message) (int, error)
 	ProcessMessage()
-	GetMessageById(id int) (Intern.Message, error)
+	GetMessageById(id int) (modelMessage.Message, error)
 }
 
 type Repository struct {
