@@ -26,7 +26,7 @@ services:
       - POSTGRES_PASSWORD=1111
       - POSTGRES_DB=Intern
     ports:
-      - "5432:5432"
+      - "5434:5432"
     networks:
       - new
     healthcheck:

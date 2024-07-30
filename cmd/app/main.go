@@ -37,12 +37,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	_ = consumer
-	// go func() {
-	// 	if err := consumer.Start(); err != nil {
-	// 		log.Fatalf("Failed to start consumer: %v", err)
-	// 	}
-	// }()
+	go func() {
+		if err := consumer.Start(); err != nil {
+			log.Fatalf("Failed to start consumer: %v", err)
+		}
+	}()
 	services := service.NewService(repos, producer)
 	handlers := handler.NewHandler(services)
 	router := handlers.InitRoutes()
