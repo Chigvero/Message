@@ -35,7 +35,7 @@ services:
       timeout: 5s
       retries: 10
     volumes:
-      - ./modelsql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./model/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   kafka:
     image: 'bitnami/kafka:latest'
