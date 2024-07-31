@@ -53,9 +53,7 @@ CREATE TABLE IF NOT EXISTS messages (
 `api/v1/message/:id` GET получение сообщения по id
 
 
-`api/v1/message/` POST отправка сообщения
-
-формат ввода ``` {
+`api/v1/message/` POST отправка сообщения формат ввода ``` {
 "text": "Text"
 }```
 
