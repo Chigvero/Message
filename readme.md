@@ -14,8 +14,8 @@ Messageio — это проект, предназначенный для обр�
 1. Клонируйте репозиторий:
 
     ```sh
-    git clone https://github.com/Chigvero/Messageio.git
-    cd Messageio
+    git clone https://github.com/Chigvero/Message.git
+    cd Message
     ```
 
 
