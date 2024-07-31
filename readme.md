@@ -55,4 +55,9 @@ CREATE TABLE IF NOT EXISTS messages (
 
 `api/v1/message/` POST отправка сообщения
 
+формат ввода ``` {
+"text": "Text"
+}```
+
+
 `api/v1/stats` GET получение статистики по обработанным сообзениям
