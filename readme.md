@@ -50,12 +50,12 @@ CREATE TABLE IF NOT EXISTS messages (
 
 ## API
 
-`api/v1/message/:id` GET получение сообщения по id
+`http://84.54.47.114:8081/api/v1/message/:id` GET получение сообщения по id
 
 
-`api/v1/message/` POST отправка сообщения формат ввода ``` {
+`http://84.54.47.114:8081/api/v1/message/` POST отправка сообщения формат ввода ``` {
 "text": "Text"
 }```
 
 
-`api/v1/stats` GET получение статистики по обработанным сообзениям
+`http://84.54.47.114:8081/api/v1/stats` GET получение статистики по обработанным сообзениям
