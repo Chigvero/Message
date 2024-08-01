@@ -53,7 +53,11 @@ CREATE TABLE IF NOT EXISTS messages (
 `http://84.54.47.114:8081/api/v1/message/:id` GET получение сообщения по id
 
 
-`http://84.54.47.114:8081/api/v1/message/` POST отправка сообщения формат ввода ``` {
+`http://84.54.47.114:8081/api/v1/message/` POST отправка сообщения формат ввода ``` 
+
+Header "Content-type : application/json";  
+
+Body: {
 "text": "Text"
 }```
 
